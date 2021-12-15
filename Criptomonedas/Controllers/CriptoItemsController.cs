@@ -24,6 +24,17 @@ namespace Criptomonedas.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CriptoItems>>> GetCriptoItems()
         {
+            foreach(var i in _context.CriptoItems)
+            {
+
+                var r = new Random();
+                i.ValorActual = r.NextDouble() * 100;
+                if(i.ValorMaximo < i.ValorActual)
+                {
+                    i.ValorMaximo = i.ValorMaximo;
+                }
+            }
+            _context.SaveChanges();
             return await _context.CriptoItems.ToListAsync();
         }
 
@@ -36,6 +47,12 @@ namespace Criptomonedas.Controllers
             if (criptoItems == null)
             {
                 return NotFound();
+            }
+            var r = new Random();
+            criptoItems.ValorActual = r.NextDouble() * 100;
+            if (criptoItems.ValorMaximo < criptoItems.ValorActual)
+            {
+                criptoItems.ValorMaximo = criptoItems.ValorMaximo;
             }
 
             return criptoItems;
