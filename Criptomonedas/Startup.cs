@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Criptomonedas.Models;
 
 namespace Criptomonedas
 {
@@ -28,6 +30,10 @@ namespace Criptomonedas
         {
 
             services.AddControllers();
+            services.AddDbContext<CriptoContext>(opt =>
+                                               opt.UseSqlServer(Configuration.GetConnectionString("CriptoList")));
+                                                //opt.UseInMemoryDatabase("CriptoList"));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Criptomonedas", Version = "v1" });
