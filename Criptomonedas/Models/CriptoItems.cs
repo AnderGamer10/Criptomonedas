@@ -10,7 +10,7 @@ namespace Criptomonedas.Models
     {
         [Key]
         public string Nombre { get; set; }
-        public double ValorMaximo { get; set; }
-        public double ValorActual { get; set; } 
+        public decimal ValorMaximo { get; set; }
+        public decimal ValorActual { get; set; } 
     }
 }
